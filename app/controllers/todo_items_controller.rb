@@ -28,6 +28,15 @@ class TodoItemsController < ApplicationController
       render action: :edit
     end
   end
+  def destroy
+    @todo_item = @todo_list.todo_items.find(params[:id])
+    if @todo_item.destroy
+      flash[:success] = "Todo list item was deleted."
+    else
+      flash[:error] = "Todo list item could not be deleted. "
+    end
+    redirect_to todo_list_todo_items_path
+  end
   # in order to not have to type the todo_list everytime in controller or views
   # for ex, the code 
   # <%= link_to "Edit", edit_todo_list_todo_item_path(@todo_list, todo_item) %>
