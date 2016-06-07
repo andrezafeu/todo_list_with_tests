@@ -17,6 +17,29 @@ class TodoItemsController < ApplicationController
   		render action: :new
   	end
   end
+  def edit
+    @todo_list = TodoList.find(params[:todo_list_id])
+    @todo_item = @todo_list.todo_items.find(params[:id])
+  end
+  def update
+    @todo_list = TodoList.find(params[:todo_list_id])
+    @todo_item = @todo_list.todo_items.find(params[:id])
+    if @todo_item.update_attributes(todo_item_params)
+      flash[:success] = "Saved todo list item."
+      redirect_to todo_list_todo_items_path
+    else
+      flash[:error] = "That todo item could not be saved."
+      render action: :edit
+    end
+  end
+  # in order to not have to type the todo_list everytime in controller or views
+  # for ex, the code 
+  # <%= link_to "Edit", edit_todo_list_todo_item_path(@todo_list, todo_item) %>
+  # can be refactored to
+  # <%= link_to "Edit", edit_todo_list_todo_item_path(todo_item) %>
+  def url_options
+    { todo_list_id: params[:todo_list_id] }.merge(super)
+  end
 
   private
   # strong parameters
