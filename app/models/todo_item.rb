@@ -4,6 +4,10 @@ class TodoItem < ActiveRecord::Base
   validates :content, presence: true,
   					  length: { minimum: 2 }
 
+  # check if items are complete and incomplete
+  scope :complete, -> { where("completed_at is not null") }
+  scope :incomplete, -> { where(completed_at: nil) }
+
   def completed?
   	# when completed_at is not blank returns false
   	!completed_at.blank?
