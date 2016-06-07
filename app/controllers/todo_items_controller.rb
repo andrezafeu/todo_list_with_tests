@@ -37,6 +37,12 @@ class TodoItemsController < ApplicationController
     end
     redirect_to todo_list_todo_items_path
   end
+  def complete
+    @todo_item = @todo_list.todo_items.find(params[:id])
+    # We want this to happen when we click the button, therefore we use Time.now
+    @todo_item.update_attribute(:completed_at, Time.now)
+    redirect_to todo_list_todo_items_path, notice: "Todo item marked as complete."
+  end
   # in order to not have to type the todo_list everytime in controller or views
   # for ex, the code 
   # <%= link_to "Edit", edit_todo_list_todo_item_path(@todo_list, todo_item) %>
