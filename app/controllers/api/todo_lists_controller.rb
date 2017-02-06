@@ -16,14 +16,13 @@ class Api::TodoListsController < ApplicationController
 	def create
 		list = TodoList.new(list_params)
 		if list.save
-			render json: {
-				status: 200,
+			render status: 200, json: {
 				message: "Successfully created list",
 				todo_list: list
 			}.to_json
 		else
-			render json: {
-				status: 500,
+			# error 422: Unprocessable Entity
+			render status: 422, json: {	
 				errors: list.errors
 			}.to_json
 		end
@@ -32,14 +31,12 @@ class Api::TodoListsController < ApplicationController
 	def update
 		list = TodoList.find(params[:id])
 		if list.update(list_params)
-			render json: {
-				status: 200,
+			render status: 200, json: {
 				message: "Successfully updated list",
 				todo_list: list
 			}.to_json
 		else
-			render json: {
-				status: 500,
+			render status: 500, json: {
 				message: "List could not be updated",
 				todo_list: list
 			}.to_json
@@ -49,8 +46,7 @@ class Api::TodoListsController < ApplicationController
 	def destroy
 		list = TodoList.find(params[:id])
 		list.destroy
-		render json: {
-			status: 200,
+		render status: 200, json: {
 			message: "Successfully deleted list",
 			todo_list: list
 		}.to_json
