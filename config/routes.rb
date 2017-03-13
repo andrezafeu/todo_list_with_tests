@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   
   namespace :api do
     resources :todo_lists do
-      resources :todo_items, only: [:create]
+      resources :todo_items, only: [:create, :update]
     end
   end
 
