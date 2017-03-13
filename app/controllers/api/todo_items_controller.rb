@@ -34,6 +34,16 @@ class Api::TodoItemsController < ApplicationController
     end
   end
 
+  def destroy
+    item = @list.todo_items.find(params[:id])
+    item.destroy
+    render status: 200, json: {
+      message: "Successfully deleted item",
+      todo_list: @list,
+      todo_item: item
+    }.to_json
+  end
+
   private
 
   def item_params
