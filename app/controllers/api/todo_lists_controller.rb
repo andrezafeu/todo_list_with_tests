@@ -1,8 +1,5 @@
 class Api::TodoListsController < ApplicationController
 
-	# to avoid error "can't verify CSRF authenticity"  while doing local tests with curl
-	skip_before_filter :verify_authenticity_token
-
 	def index
 		# send back a json collection of the todo lists
 		render json: TodoList.all
