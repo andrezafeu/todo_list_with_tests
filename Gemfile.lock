@@ -169,7 +169,6 @@ PLATFORMS
 
 DEPENDENCIES
   capybara (~> 2.1.0)
-  coffee-rails (~> 4.1.0)
   jbuilder (~> 2.0)
   jquery-rails
   rails (= 4.2.6)
