@@ -1,4 +1,4 @@
-class Api::TodoListsController < ApplicationController
+class Api::TodoListsController < Api::ApiController
 
 	def index
 		# send back a json collection of the todo lists

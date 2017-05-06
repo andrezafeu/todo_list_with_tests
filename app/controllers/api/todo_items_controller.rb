@@ -1,4 +1,4 @@
-class Api::TodoItemsController < ApplicationController
+class Api::TodoItemsController < Api::ApiController
   before_filter :find_todo_list
 
   def create
